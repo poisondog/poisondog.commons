@@ -39,7 +39,7 @@ public class GradientDescentTest {
 			}
 		};
 		GradientDescent task = new GradientDescent(function);
-		Assert.assertEquals(0.7000050560272939, task.execute(new Vector(4.0)).get(0), Math.pow(10, -5));
-		Assert.assertEquals(-4.899951616389444, task.execute(new Vector(-10.0)).get(0), Math.pow(10, -5));
+		Assert.assertEquals(0.7000050560272939, task.execute(new Vector(4.0)).get(0), Math.pow(10, -3));
+		Assert.assertEquals(-4.899951616389444, task.execute(new Vector(-10.0)).get(0), Math.pow(10, -3));
 	}
 }
