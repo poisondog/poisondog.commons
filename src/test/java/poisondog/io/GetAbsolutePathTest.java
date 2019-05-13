@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Adam Huang <poisondog@gmail.com>
+ * Copyright (C) 2019 Adam Huang <poisondog@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,25 @@
  */
 package poisondog.io;
 
-import java.nio.file.Paths;
-import poisondog.core.Mission;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import java.io.File;
+
 /**
  * @author Adam Huang
+ * @since 2019-05-13
  */
-public class GetAbsolutePath implements Mission<String> {
+public class GetAbsolutePathTest {
 
-	@Override
-	public String execute(String path) {
-		return Paths.get(path).toAbsolutePath().normalize().toString();
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Test
+	public void testExecute() throws Exception {
+		GetAbsolutePath task = new GetAbsolutePath();
+		Assert.assertEquals("/tmp", task.execute("/tmp"));
+		Assert.assertEquals(System.getProperty("user.dir"), task.execute("."));
 	}
 }
