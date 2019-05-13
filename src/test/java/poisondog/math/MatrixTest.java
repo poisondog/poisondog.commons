@@ -460,6 +460,13 @@ public class MatrixTest {
 	}
 
 	@Test
+	public void testCloneFrom() throws Exception {
+		Matrix m = new Matrix(1, 1);
+		m.clone(mMatrix);
+		Assert.assertEquals(mMatrix, m);
+	}
+
+	@Test
 	public void testMax() throws Exception {
 		Assert.assertEquals(3.0, mMatrix.max(), Math.pow(10, -6));
 	}
