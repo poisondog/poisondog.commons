@@ -39,4 +39,14 @@ public class PrintUtilsTest {
 		Assert.assertEquals("\u001B[31mHello\u001B[0m", PrintUtils.red("Hello"));
 	}
 
+	@Test
+	public void testGreen() throws Exception {
+		Assert.assertEquals("\u001B[32mHello\u001B[0m", PrintUtils.green("Hello"));
+	}
+
+	@Test
+	public void testYellow() throws Exception {
+		Assert.assertEquals("\u001B[33mHello\u001B[0m", PrintUtils.yellow("Hello"));
+	}
+
 }
