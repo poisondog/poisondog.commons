@@ -20,8 +20,8 @@ package poisondog.string;
  */
 public class ExtractParentUrl implements StringProcessor {
 	public String process(String input) {
-		ExtractPath extractPath = new ExtractPath();
-		ReplacePath replacePath = new ReplacePath(extractPath.process(input.replaceAll("(/[^/]+/?)$", "")));
+		GetPath extractPath = new GetPath();
+		ReplacePath replacePath = new ReplacePath(extractPath.execute(input.replaceAll("(/[^/]+/?)$", "")));
 		String result = replacePath.process(input);
 		if (result.endsWith("/"))
 			return result;

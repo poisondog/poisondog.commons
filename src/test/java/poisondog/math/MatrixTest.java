@@ -18,6 +18,9 @@ package poisondog.math;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import poisondog.io.FileToObject;
+import poisondog.io.ObjectToFile;
+import java.io.File;
 
 /**
  * @author Adam Huang
@@ -464,6 +467,16 @@ public class MatrixTest {
 	@Test
 	public void testMin() throws Exception {
 		Assert.assertEquals(0.0, mMatrix.min(), Math.pow(10, -6));
+	}
+
+	@Test
+	public void testSaveLoad() throws Exception {
+		ObjectToFile saver = new ObjectToFile("/tmp/matrix.txt");
+		File storage = saver.execute(mMatrix);
+		FileToObject loader = new FileToObject();
+		Matrix another = (Matrix) loader.execute(storage);
+		Assert.assertEquals(mMatrix, another);
+		storage.delete();
 	}
 
 }

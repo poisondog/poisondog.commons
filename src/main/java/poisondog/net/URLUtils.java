@@ -18,13 +18,13 @@ package poisondog.net;
 import java.io.UnsupportedEncodingException;
 import java.net.URLConnection;
 import java.util.Map;
-import poisondog.string.ExtractFileName;
-import poisondog.string.ExtractHost;
 import poisondog.string.ExtractParent;
 import poisondog.string.ExtractParentUrl;
-import poisondog.string.ExtractPath;
 import poisondog.string.ExtractPort;
-import poisondog.string.ExtractScheme;
+import poisondog.string.GetFileName;
+import poisondog.string.GetHost;
+import poisondog.string.GetPath;
+import poisondog.string.GetScheme;
 import poisondog.string.URLDecode;
 import poisondog.string.URLEncode;
 import poisondog.vfs.GuessContentType;
@@ -55,11 +55,11 @@ public class URLUtils {
 	}
 
 	public static String scheme(String url) {
-		return new ExtractScheme().process(url);
+		return new GetScheme().execute(url);
 	}
 
 	public static String host(String url) {
-		return new ExtractHost().process(url);
+		return new GetHost().execute(url);
 	}
 
 	public static int port(String url) {
@@ -71,7 +71,7 @@ public class URLUtils {
 	}
 
 	public static String path(String url) {
-		return new ExtractPath().process(url);
+		return new GetPath().execute(url);
 	}
 
 	public static String parent(String url) {
@@ -83,7 +83,7 @@ public class URLUtils {
 	}
 
 	public static String file(String url) {
-		return new ExtractFileName().process(url);
+		return new GetFileName().execute(url);
 	}
 
 	public static String httpQuery(Map<String, String> map) {

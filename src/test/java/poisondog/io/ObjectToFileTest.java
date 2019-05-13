@@ -39,8 +39,8 @@ public class ObjectToFileTest {
 		target.add(3);
 		target.add(4);
 
-		ObjectToFile toFile = new ObjectToFile();
-		File file = toFile.execute(toFile.new Parameter("list.tmp", target));
+		ObjectToFile toFile = new ObjectToFile("list.tmp");
+		File file = toFile.execute(target);
 
 		FileToObject toObject = new FileToObject();
 		ArrayList result = (ArrayList)toObject.execute(file);

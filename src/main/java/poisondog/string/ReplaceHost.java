@@ -34,7 +34,7 @@ public class ReplaceHost implements StringProcessor, Mission<String> {
 
 	@Override
 	public String execute(String input) {
-		String old = new ExtractHost().process(input);
+		String old = new GetHost().execute(input);
 		if(!old.isEmpty())
 			return input.replaceFirst(old, mHost);
 		return input;

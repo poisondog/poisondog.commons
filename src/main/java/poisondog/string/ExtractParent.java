@@ -23,6 +23,6 @@ public class ExtractParent implements StringProcessor {
 	@Override
 	public String process(String input) {
 		String parentLocation = input.replaceAll("(/[^/]+/?)$", "");
-		return new ExtractFileName().process(parentLocation);
+		return new GetFileName().execute(parentLocation);
 	}
 }

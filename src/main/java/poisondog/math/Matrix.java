@@ -15,26 +15,25 @@
  */
 package poisondog.math;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import poisondog.json.Jsonable;
 import poisondog.json.JsonUtils;
-import poisondog.util.Pair;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import poisondog.util.PrintUtils;
 
 /**
  * @author Adam Huang
  */
-public class Matrix implements Cloneable, Jsonable {
+public class Matrix implements Cloneable, Jsonable, Serializable {
 	private static Random sRandom = new Random();
 	private int mRow;
 	private int mCol;
 	private double mTolerance;
-	private Map<Pair<Integer, Integer>, Double> mMatrix;
+	private Map<String, Double> mMatrix;
 
 	/**
 	 * Constructor
@@ -51,7 +50,7 @@ public class Matrix implements Cloneable, Jsonable {
 		mTolerance = Math.pow(10, -6);
 		mRow = row;
 		mCol = col;
-		mMatrix = new HashMap<Pair<Integer, Integer>, Double>();
+		mMatrix = new HashMap<String, Double>();
 		for (int i = 0; i < mRow; i++) {
 			for (int j = 0; j < mCol; j++) {
 				set(i, j, 0);
@@ -123,12 +122,12 @@ public class Matrix implements Cloneable, Jsonable {
 
 	public double get(int row, int col) {
 		checkIndex(row, col);
-		return mMatrix.get(new Pair(row, col));
+		return mMatrix.get(toIndex(row, col));
 	}
 
 	public void set(int row, int col, double value) {
 		checkIndex(row, col);
-		mMatrix.put(new Pair(row, col), value);
+		mMatrix.put(toIndex(row, col), value);
 	}
 
 	public void set(int row, double... values) {
@@ -337,6 +336,16 @@ public class Matrix implements Cloneable, Jsonable {
 		return sameRow(another) && sameCol(another);
 	}
 
+	private String toIndex(int row, int col) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("(");
+		builder.append(row);
+		builder.append(",");
+		builder.append(col);
+		builder.append(")");
+		return builder.toString();
+	}
+
 	public int getRowSize() {
 		return mRow;
 	}
@@ -450,7 +459,7 @@ public class Matrix implements Cloneable, Jsonable {
 		assert obj.getString("class").equals(getClass().getName());
 		mRow = obj.getInt("row");
 		mCol = obj.getInt("col");
-		mMatrix = new HashMap<Pair<Integer, Integer>, Double>();
+		mMatrix = new HashMap<String, Double>();
 		JSONArray content = obj.getJSONArray("content");
 		for (int i = 0; i < content.length(); i++) {
 			JSONArray row = content.getJSONArray(i);
@@ -468,7 +477,7 @@ public class Matrix implements Cloneable, Jsonable {
 	public void clone(Matrix another) {
 		mRow = another.mRow;
 		mCol = another.mCol;
-		mMatrix = new HashMap<Pair<Integer, Integer>, Double>();
+		mMatrix = new HashMap<String, Double>();
 		for (int i = 0; i < mRow; i++) {
 			for (int j = 0; j < mCol; j++) {
 				set(i, j, another.get(i, j));

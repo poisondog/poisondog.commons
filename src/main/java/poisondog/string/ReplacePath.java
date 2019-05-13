@@ -30,7 +30,7 @@ public class ReplacePath implements StringProcessor, Mission<String> {
 
 	@Override
 	public String execute(String input) {
-		String old = toNormalString(new ExtractPath().process(input));
+		String old = toNormalString(new GetPath().execute(input));
 		if(!old.equals("/"))
 			return input.replaceFirst(old, mPath);
 		if(input.endsWith("/"))

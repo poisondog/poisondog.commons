@@ -27,29 +27,23 @@ import poisondog.core.Mission;
  * @author Adam Huang
  * @since 2016-11-17
  */
-public class ObjectToFile implements Mission<ObjectToFile.Parameter>{
+public class ObjectToFile implements Mission<Serializable>{
+	private String mFilename;
 
-	@Override
-	public File execute(ObjectToFile.Parameter parameter) throws FileNotFoundException, IOException {
-		File file = new File(parameter.mFilename);
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-		oos.writeObject(parameter.mTarget);
-		oos.close();
-		return file;
+	/**
+	 * Constructor
+	 */
+	public ObjectToFile(String filename) {
+		mFilename = filename;
 	}
 
-	public class Parameter {
-		private String mFilename;
-		private Serializable mTarget;
-
-		/**
-		 * Constructor
-		 */
-		public Parameter(String filename, Serializable target) {
-			mFilename = filename;
-			mTarget = target;
-		}
-
+	@Override
+	public File execute(Serializable mTarget) throws FileNotFoundException, IOException {
+		File file = new File(mFilename);
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+		oos.writeObject(mTarget);
+		oos.close();
+		return file;
 	}
 
 }

@@ -40,8 +40,8 @@ public class URLDecodePath implements StringProcessor, Mission<String> {
 
 	@Override
 	public String execute(String input) throws UnsupportedEncodingException {
-		ExtractPath task = new ExtractPath();
-		String path = task.process(input);
+		GetPath task = new GetPath();
+		String path = task.execute(input);
 		StringBuilder builder = new StringBuilder();
 		builder.append(input.replace(path, ""));
 		for (String str: path.split("/")) {
